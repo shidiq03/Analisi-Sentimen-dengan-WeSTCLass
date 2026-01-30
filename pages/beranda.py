@@ -35,6 +35,7 @@ def show():
     """)
 
     st.image(
-        "../westclass_run/Positif__3_-removebg-preview.png",
+        "westclass_run/Positif__3_-removebg-preview.png",
         use_container_width=True
+
     )
