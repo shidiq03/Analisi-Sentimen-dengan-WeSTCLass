@@ -1,0 +1,13 @@
+{
+  "max_len": 63,
+  "emb_dim": 300,
+  "alpha_bg": 0.2,
+  "gamma": 60,
+  "len_avg": 20.432366630862873,
+  "len_std": 11.830777736321808,
+  "classes": [
+    "negatif",
+    "netral",
+    "positif"
+  ]
+}
