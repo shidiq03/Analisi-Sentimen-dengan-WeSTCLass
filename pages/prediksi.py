@@ -26,7 +26,7 @@ def load_westclass_pipeline():
 
     # Naik dari pages/ ke root app/
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    model_dir = os.path.join(BASE_DIR, "westclass_run")
+    model_dir = os.path.join(BASE_DIR,  "..", "westclass_run")
 
     print("MODEL DIR:", model_dir)  # debug
 
@@ -105,3 +105,4 @@ def show():
                                file_name="new_hasil_prediksi.csv", mime="text/csv")
         else:
             st.error("Kolom 'komentar' tidak ditemukan dalam file.")
+
