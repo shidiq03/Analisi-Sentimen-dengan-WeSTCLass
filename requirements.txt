@@ -78,3 +78,5 @@ Werkzeug==3.1.5
 wordcloud==1.9.4
 wrapt==2.0.1
 xgboost==3.0.2
+lime==0.2.0.1
+
