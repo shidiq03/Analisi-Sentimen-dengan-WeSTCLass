@@ -1,7 +1,6 @@
 import streamlit as st
 from beranda import show as show_beranda
 from evaluasi import show as show_evaluasi
-from distribusi import show as show_distribusi
 from prediksi import show as show_prediksi
 
 st.sidebar.title("Pilih Halaman")
@@ -11,7 +10,7 @@ if page == "Beranda":
     show_beranda()
 elif page == "Evaluasi":
     show_evaluasi()
-
 elif page == "Prediksi":
     show_prediksi()
+
 
