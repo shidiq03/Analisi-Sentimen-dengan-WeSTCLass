@@ -12,12 +12,12 @@ import altair as alt
 def show():
     st.title("Evaluasi Model CNN dengan metode WeSTClass")
 
-    df = pd.read_csv("../westclass_run/hasil_prediksi_dl.csv")
+    df = pd.read_csv("westclass_run/hasil_prediksi_dl.csv")
 
-    with open("../westclass_run/history_pretrain.pkl", "rb") as f:
+    with open("westclass_run/history_pretrain.pkl", "rb") as f:
         hist_pre = pickle.load(f)
 
-    with open("../westclass_run/history_self.pkl", "rb") as f:
+    with open("westclass_run/history_self.pkl", "rb") as f:
         hist_self = pickle.load(f)
 
     acc = accuracy_score(df["label_asli"], df["prediksi_sentimen"])
@@ -230,6 +230,7 @@ def show():
     **Cara membaca**:
     - Loss yang menurun dan stabil menandakan konvergensi model.
     """)
+
 
 
 
