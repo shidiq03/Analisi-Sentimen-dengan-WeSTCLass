@@ -6,6 +6,7 @@ import json
 import pickle
 import tensorflow as tf
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+from lime.lime_text import LimeTextExplainer
 
 # ================= CLEAN TEXT (SAMA SEPERTI TRAINING DL SEDERHANA) =================
 
@@ -65,11 +66,40 @@ def show():
 
     user_input = st.text_area("Masukkan komentar tentang PPN 12%:")
 
-    if st.button("Prediksi"):
+        if st.button("Prediksi"):
         if user_input.strip() != "":
             with st.spinner("Memproses..."):
                 label, conf = predict_text([user_input], model, tokenizer, le, MAX_LEN)
-            st.success(f"Prediksi Sentimen: {label[0]} (confidence={conf[0]:.3f})")
+            # ===== HASIL PREDIKSI =====
+            st.success(
+                f"Prediksi Sentimen: {label[0]} (confidence={conf[0]:.3f})"
+            )
+
+            # ===== XAI - LIME =====
+            st.subheader("🔍 Explainable AI (LIME)")
+
+            class_names = list(le.classes_)
+
+            explainer = LimeTextExplainer(
+                class_names=class_names,
+                split_expression=r'\W+'
+            )
+
+            exp = explainer.explain_instance(
+                user_input,
+                classifier_fn=lambda x: lime_predict_proba(
+                    x, model, tokenizer, MAX_LEN
+                ),
+                num_features=10
+            )
+
+            lime_df = pd.DataFrame(
+                exp.as_list(),
+                columns=["Kata", "Bobot Pengaruh"]
+            )
+
+            st.write("Kata-kata yang paling berpengaruh terhadap prediksi:")
+            st.dataframe(lime_df)
         else:
             st.warning("⚠ Silakan masukkan komentar terlebih dahulu.")
 
@@ -105,5 +135,6 @@ def show():
                                file_name="new_hasil_prediksi.csv", mime="text/csv")
         else:
             st.error("Kolom 'komentar' tidak ditemukan dalam file.")
+
 
 
