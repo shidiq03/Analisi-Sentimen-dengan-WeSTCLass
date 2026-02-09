@@ -19,11 +19,6 @@ def clean_str(s):
     s = re.sub(r"\s+", " ", s)
     return s.strip()
 
-def lime_predict_proba(texts, model, tokenizer, max_len):
-    texts_clean = [clean_str(t) for t in texts]
-    seq = tokenizer.texts_to_sequences(texts_clean)
-    x = pad_sequences(seq, maxlen=max_len, padding="post", truncating="post")
-    return model.predict(x, verbose=0)
 # ================= LOAD WESTCLASS PIPELINE =================
 
 @st.cache_resource
@@ -62,6 +57,11 @@ def predict_text(texts, model, tokenizer, label_encoder, max_len):
 
     return labels, confidences
 
+def lime_predict_proba(texts, model, tokenizer, max_len):
+    texts_clean = [clean_str(t) for t in texts]
+    seq = tokenizer.texts_to_sequences(texts_clean)
+    x = pad_sequences(seq, maxlen=max_len, padding="post", truncating="post")
+    return model.predict(x, verbose=0)
 # ================= STREAMLIT UI (TIDAK DIUBAH) =================
 
 def show():
@@ -140,6 +140,7 @@ def show():
                                file_name="new_hasil_prediksi.csv", mime="text/csv")
         else:
             st.error("Kolom 'komentar' tidak ditemukan dalam file.")
+
 
 
 
