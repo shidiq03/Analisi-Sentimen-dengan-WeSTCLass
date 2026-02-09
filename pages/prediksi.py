@@ -71,7 +71,7 @@ def show():
 
     user_input = st.text_area("Masukkan komentar tentang PPN 12%:")
 
-        if st.button("Prediksi"):
+    if st.button("Prediksi"):
         if user_input.strip() != "":
             with st.spinner("Memproses..."):
                 label, conf = predict_text([user_input], model, tokenizer, le, MAX_LEN)
@@ -140,6 +140,7 @@ def show():
                                file_name="new_hasil_prediksi.csv", mime="text/csv")
         else:
             st.error("Kolom 'komentar' tidak ditemukan dalam file.")
+
 
 
 
